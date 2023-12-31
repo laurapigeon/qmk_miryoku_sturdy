@@ -53,16 +53,54 @@ MIRYOKU_LAYER_LIST
 
 // shift functions
 
-const key_override_t capsword_key_override = ko_make_basic(MOD_MASK_SHIFT, CW_TOGG, KC_CAPS);
-const key_override_t delete_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_BSPC, KC_DEL);
+const key_override_t backspace_key_override = ko_make_basic(MOD_MASK_SHIFT, LT(U_SYM,KC_BSPC), KC_DEL);
 const key_override_t comma_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_COMM, UK_QUES);
-const key_override_t dot_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_DOT, UK_EXLM);
+const key_override_t period_key_override = ko_make_basic(MOD_MASK_SHIFT, ALGR_T(UK_DOT), UK_EXLM);
+const key_override_t apostrophe_key_override = ko_make_basic(MOD_MASK_SHIFT, LT(U_BUTTON,UK_QUOT), UK_MINS);
+const key_override_t one_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_1, KC_F1);
+const key_override_t two_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_2, KC_F2);
+const key_override_t three_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_3, KC_F3);
+const key_override_t four_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_4, KC_F4);
+const key_override_t five_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_5, KC_F5);
+const key_override_t six_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_6, KC_F6);
+const key_override_t seven_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_7, KC_F7);
+const key_override_t eight_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_8, KC_F8);
+const key_override_t nine_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_9, KC_F9);
+const key_override_t ten_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_MINS, KC_F10);
+const key_override_t eleven_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_PLUS, KC_F11);
+const key_override_t twelve_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_PERC, KC_F12);
+const key_override_t pound_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_PND, UK_DLR);
+const key_override_t slash_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_SLSH, UK_BSLS);
+const key_override_t colon_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_SCLN, UK_COLN);
+const key_override_t quote_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_DQUO, UK_QUOT);
+const key_override_t leftparen_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_LPRN, UK_LABK);
+const key_override_t rightparen_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_RPRN, UK_RABK);
+const key_override_t pipe_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_PIPE, UK_NOT);
 
 const key_override_t **key_overrides = (const key_override_t *[]){
-    &capsword_key_override,
-    &delete_key_override,
+    &backspace_key_override,
     &comma_key_override,
-    &dot_key_override,
+    &period_key_override,
+    &apostrophe_key_override,
+    &one_key_override,
+    &two_key_override,
+    &three_key_override,
+    &four_key_override,
+    &five_key_override,
+    &six_key_override,
+    &seven_key_override,
+    &eight_key_override,
+    &nine_key_override,
+    &ten_key_override,
+    &eleven_key_override,
+    &twelve_key_override,
+    &pound_key_override,
+    &slash_key_override,
+    &colon_key_override,
+    &quote_key_override,
+    &leftparen_key_override,
+    &rightparen_key_override,
+    &pipe_key_override,
     NULL
 };
 
@@ -70,30 +108,30 @@ const key_override_t **key_overrides = (const key_override_t *[]){
 // thumb combos
 
 #if defined (MIRYOKU_KLUDGE_THUMBCOMBOS)
-const uint16_t PROGMEM thumbcombos_base_right[] = {LT(U_SYM, KC_ENT), LT(U_NUM, KC_BSPC), COMBO_END};
-const uint16_t PROGMEM thumbcombos_base_left[] = {LT(U_NAV, KC_SPC), LT(U_MOUSE, KC_TAB), COMBO_END};
-const uint16_t PROGMEM thumbcombos_nav[] = {KC_ENT, KC_BSPC, COMBO_END};
-const uint16_t PROGMEM thumbcombos_mouse[] = {KC_BTN2, KC_BTN1, COMBO_END};
-const uint16_t PROGMEM thumbcombos_media[] = {KC_MSTP, KC_MPLY, COMBO_END};
-const uint16_t PROGMEM thumbcombos_num[] = {KC_0, KC_MINS, COMBO_END};
-  #if defined (MIRYOKU_LAYERS_FLIP)
-const uint16_t PROGMEM thumbcombos_sym[] = {KC_UNDS, KC_LPRN, COMBO_END};
-  #else
-const uint16_t PROGMEM thumbcombos_sym[] = {KC_RPRN, KC_UNDS, COMBO_END};
-  #endif
-const uint16_t PROGMEM thumbcombos_fun[] = {KC_SPC, KC_TAB, COMBO_END};
-combo_t key_combos[] = {
-  COMBO(thumbcombos_base_right, LT(U_FUN, KC_DEL)),
-  COMBO(thumbcombos_base_left, LT(U_MEDIA, KC_ESC)),
-  COMBO(thumbcombos_nav, KC_DEL),
-  COMBO(thumbcombos_mouse, KC_BTN3),
-  COMBO(thumbcombos_media, KC_MUTE),
-  COMBO(thumbcombos_num, KC_DOT),
-  #if defined (MIRYOKU_LAYERS_FLIP)
-  COMBO(thumbcombos_sym, KC_RPRN),
-  #else
-  COMBO(thumbcombos_sym, KC_LPRN),
-  #endif
-  COMBO(thumbcombos_fun, KC_APP)
-};
+    const uint16_t PROGMEM thumbcombos_base_right[] = {LT(U_SYM, KC_ENT), LT(U_NUM, KC_BSPC), COMBO_END};
+    const uint16_t PROGMEM thumbcombos_base_left[] = {LT(U_NAV, KC_SPC), LT(U_MOUSE, KC_TAB), COMBO_END};
+    const uint16_t PROGMEM thumbcombos_nav[] = {KC_ENT, KC_BSPC, COMBO_END};
+    const uint16_t PROGMEM thumbcombos_mouse[] = {KC_BTN2, KC_BTN1, COMBO_END};
+    const uint16_t PROGMEM thumbcombos_media[] = {KC_MSTP, KC_MPLY, COMBO_END};
+    const uint16_t PROGMEM thumbcombos_num[] = {KC_0, KC_MINS, COMBO_END};
+    #if defined (MIRYOKU_LAYERS_FLIP)
+        const uint16_t PROGMEM thumbcombos_sym[] = {KC_UNDS, KC_LPRN, COMBO_END};
+    #else
+        const uint16_t PROGMEM thumbcombos_sym[] = {KC_RPRN, KC_UNDS, COMBO_END};
+    #endif
+    const uint16_t PROGMEM thumbcombos_fun[] = {KC_SPC, KC_TAB, COMBO_END};
+    combo_t key_combos[] = {
+    COMBO(thumbcombos_base_right, LT(U_FUN, KC_DEL)),
+    COMBO(thumbcombos_base_left, LT(U_MEDIA, KC_ESC)),
+    COMBO(thumbcombos_nav, KC_DEL),
+    COMBO(thumbcombos_mouse, KC_BTN3),
+    COMBO(thumbcombos_media, KC_MUTE),
+    COMBO(thumbcombos_num, KC_DOT),
+    #if defined (MIRYOKU_LAYERS_FLIP)
+        COMBO(thumbcombos_sym, KC_RPRN),
+    #else
+        COMBO(thumbcombos_sym, KC_LPRN),
+    #endif
+    COMBO(thumbcombos_fun, KC_APP)
+    };
 #endif
