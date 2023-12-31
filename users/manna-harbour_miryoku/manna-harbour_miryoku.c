@@ -7,6 +7,8 @@
 
 #include "manna-harbour_miryoku.h"
 
+#include "keymap_uk.h"
+
 
 // Additional Features double tap guard
 
@@ -52,9 +54,15 @@ MIRYOKU_LAYER_LIST
 // shift functions
 
 const key_override_t capsword_key_override = ko_make_basic(MOD_MASK_SHIFT, CW_TOGG, KC_CAPS);
+const key_override_t delete_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_BSPC, KC_DEL);
+const key_override_t comma_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_COMM, UK_QUES);
+const key_override_t dot_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_DOT, UK_EXLM);
 
 const key_override_t **key_overrides = (const key_override_t *[]){
     &capsword_key_override,
+    &delete_key_override,
+    &comma_key_override,
+    &dot_key_override,
     NULL
 };
 
