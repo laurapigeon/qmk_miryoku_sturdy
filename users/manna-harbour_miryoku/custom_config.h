@@ -1,10 +1,10 @@
 #define UNICODE_SELECTED_MODES UNICODE_MODE_LINUX
 
 #define MIRYOKU_LAYER_BASE \
-UK_V,              UK_M,              UK_L,              UK_C,              UK_P,              UK_B,              QK_AREP,           UK_U,              UK_O,              UK_Q,              \
+UK_V,              UK_M,              UK_L,              UK_C,              UK_P,              UK_B,              KC_F21,            UK_U,              UK_O,              UK_Q,              \
 LGUI_T(UK_S),      LALT_T(UK_T),      LCTL_T(UK_R),      LSFT_T(UK_D),      UK_Y,              UK_F,              LSFT_T(UK_N),      LCTL_T(UK_E),      LALT_T(UK_A),      LGUI_T(UK_I),      \
 LT(U_BUTTON,UK_X), ALGR_T(UK_K),      UK_J,              UK_G,              UK_W,              UK_Z,              UK_H,              UK_COMM,           ALGR_T(UK_DOT),    LT(U_BUTTON,UK_QUOT),\
-U_NP,              U_NP,              LT(U_MEDIA,KC_ESC),LT(U_NAV,QK_REP),  LT(U_MOUSE,KC_TAB),LT(U_SYM,KC_BSPC), LT(U_NUM,KC_SPC),  LT(U_FUN,KC_ENT),  U_NP,              U_NP
+U_NP,              U_NP,              LT(U_MEDIA,KC_ESC),LT(U_NAV,KC_F24),  LT(U_MOUSE,KC_TAB),LT(U_SYM,KC_BSPC), LT(U_NUM,KC_SPC),  LT(U_FUN,KC_ENT),  U_NP,              U_NP
 
 #define MIRYOKU_LAYER_NUM \
 UK_PLUS,           UK_4,              UK_5,              UK_6,              UC(0xD7),          U_NA,              TD(U_TD_U_BASE),   TD(U_TD_U_EXTRA),  TD(U_TD_U_TAP),    TD(U_TD_BOOT),     \
@@ -43,7 +43,7 @@ U_NA,              KC_ALGR,           TD(U_TD_U_FUN),    TD(U_TD_U_MEDIA),  U_NA
 U_NP,              U_NP,              U_NA,              U_NA,              U_NA,              KC_MSTP,           KC_MPLY,           KC_MUTE,           U_NP,              U_NP
 
 #define MIRYOKU_LAYER_TAP \
-UK_V,              UK_M,              UK_L,              UK_C,              UK_P,              UK_B,              QK_AREP,            UK_U,              UK_O,              UK_Q,              \
+UK_V,              UK_M,              UK_L,              UK_C,              UK_P,              UK_B,              QK_AREP,           UK_U,              UK_O,              UK_Q,              \
 LGUI_T(UK_S),      LALT_T(UK_T),      LCTL_T(UK_R),      LSFT_T(UK_D),      UK_Y,              UK_F,              LSFT_T(UK_N),      LCTL_T(UK_E),      LALT_T(UK_A),      LGUI_T(UK_I),      \
 LT(U_BUTTON,UK_X), ALGR_T(UK_K),      UK_J,              UK_G,              UK_W,              UK_Z,              UK_H,              UK_COMM,           ALGR_T(UK_DOT),    LT(U_BUTTON,UK_QUOT),\
-U_NP,              U_NP,              TD(U_TD_U_BASE),   QK_REP,            KC_TAB,            KC_BSPC,           KC_SPC,            KC_ENT,            U_NP,              U_NP
+U_NP,              U_NP,              TD(U_TD_U_BASE),   QK_REP,            LT(U_MOUSE,KC_TAB),LT(U_SYM,KC_BSPC), LT(U_NUM,KC_SPC),  LT(U_FUN,KC_ENT),  U_NP,              U_NP
