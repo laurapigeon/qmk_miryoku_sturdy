@@ -80,32 +80,30 @@ MIRYOKU_LAYER_LIST
 
 // shift functions
 
-const key_override_t backspace_key_override = ko_make_basic(MOD_MASK_SHIFT, LT(U_SYM,KC_BSPC), KC_DEL);
 const key_override_t comma_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_COMM, UK_QUES);
 const key_override_t period_key_override = ko_make_basic(MOD_MASK_SHIFT, ALGR_T(UK_DOT), UK_EXLM);
 const key_override_t apostrophe_key_override = ko_make_basic(MOD_MASK_SHIFT, LT(U_BUTTON,UK_QUOT), UK_MINS);
-const key_override_t one_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_1, KC_F1);
-const key_override_t two_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_2, KC_F2);
-const key_override_t three_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_3, KC_F3);
-const key_override_t four_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_4, KC_F4);
-const key_override_t five_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_5, KC_F5);
-const key_override_t six_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_6, KC_F6);
-const key_override_t seven_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_7, KC_F7);
-const key_override_t eight_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_8, KC_F8);
-const key_override_t nine_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_9, KC_F9);
-const key_override_t ten_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_MINS, KC_F10);
-const key_override_t eleven_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_PLUS, KC_F11);
-const key_override_t twelve_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_PERC, KC_F12);
+
+const key_override_t one_key_override = ko_make_basic(MOD_MASK_GUI, UK_1, KC_F1);
+const key_override_t two_key_override = ko_make_basic(MOD_MASK_GUI, UK_2, KC_F2);
+const key_override_t three_key_override = ko_make_basic(MOD_MASK_GUI, UK_3, KC_F3);
+const key_override_t four_key_override = ko_make_basic(MOD_MASK_GUI, UK_4, KC_F4);
+const key_override_t five_key_override = ko_make_basic(MOD_MASK_GUI, UK_5, KC_F5);
+const key_override_t six_key_override = ko_make_basic(MOD_MASK_GUI, UK_6, KC_F6);
+const key_override_t seven_key_override = ko_make_basic(MOD_MASK_GUI, UK_7, KC_F7);
+const key_override_t eight_key_override = ko_make_basic(MOD_MASK_GUI, UK_8, KC_F8);
+const key_override_t nine_key_override = ko_make_basic(MOD_MASK_GUI, UK_9, KC_F9);
+const key_override_t ten_key_override = ko_make_basic(MOD_MASK_GUI, UK_MINS, KC_F10);
+const key_override_t eleven_key_override = ko_make_basic(MOD_MASK_GUI, UK_PLUS, KC_F11);
+const key_override_t twelve_key_override = ko_make_basic(MOD_MASK_GUI, UK_COLN, KC_F12);
+
 const key_override_t pound_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_PND, UK_DLR);
-const key_override_t slash_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_SLSH, UK_BSLS);
-const key_override_t colon_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_SCLN, UK_COLN);
-const key_override_t quote_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_DQUO, UK_QUOT);
+const key_override_t leftbracket_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_LBRC, UK_LCBR);
+const key_override_t rightbracket_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_RBRC, UK_RCBR);
 const key_override_t leftparen_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_LPRN, UK_LABK);
 const key_override_t rightparen_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_RPRN, UK_RABK);
-const key_override_t pipe_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_PIPE, UK_NOT);
 
 const key_override_t **key_overrides = (const key_override_t *[]){
-    &backspace_key_override,
     &comma_key_override,
     &period_key_override,
     &apostrophe_key_override,
@@ -122,12 +120,8 @@ const key_override_t **key_overrides = (const key_override_t *[]){
     &eleven_key_override,
     &twelve_key_override,
     &pound_key_override,
-    &slash_key_override,
-    &colon_key_override,
-    &quote_key_override,
     &leftparen_key_override,
     &rightparen_key_override,
-    &pipe_key_override,
     NULL
 };
 
@@ -172,8 +166,12 @@ bool remember_last_key_user(uint16_t keycode, keyrecord_t* record,
         case KC_F21:
         case KC_F22:
         case KC_F23:
+        case LT(U_MEDIA,KC_ESC):
         case LT(U_NAV,KC_F24):
-            return false;  // Ignore ALTREP keys.
+        case LT(U_MOUSE,KC_TAB):
+        case LT(U_SYM,KC_BSPC):
+        case LT(U_FUN,KC_ENT):
+            return false;  // Ignore keys.
     }
 
     return true;  // Other keys can be repeated.
@@ -223,7 +221,7 @@ static void process_altrepeat_key(uint16_t prev_keycode, uint8_t prev_mods) {
         case LSFT_T(UK_D): SEND_STRING(/*d*/"d"); break;
         case UK_Y: SEND_STRING(/*y*/"ou"); break;
         case UK_F: SEND_STRING(/*f*/"f"); break;
-        case LSFT_T(UK_N): SEND_STRING(/*n*/"f"); break;
+        case LSFT_T(UK_N): SEND_STRING(/*n*/"n"); break;
         case LCTL_T(UK_E): SEND_STRING(/*e*/"e"); break;
         case LALT_T(UK_A): SEND_STRING(/*a*/"nd"); break;
         case LGUI_T(UK_I): SEND_STRING(/*i*/"ng"); break;
