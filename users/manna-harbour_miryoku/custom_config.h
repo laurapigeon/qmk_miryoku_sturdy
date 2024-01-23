@@ -1,4 +1,6 @@
 #define UNICODE_SELECTED_MODES UNICODE_MODE_LINUX
+#define COMBO_TERM 200
+#define EXTRA_SHORT_COMBOS
 
 #define MIRYOKU_LAYER_BASE \
 KC_V,              KC_M,              KC_L,              KC_C,              KC_P,              KC_B,              KC_F21,            KC_U,              KC_O,              KC_Q,              \
