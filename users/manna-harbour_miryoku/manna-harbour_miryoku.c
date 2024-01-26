@@ -364,6 +364,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
                 }
                 return false;
             }
+            break;
 
 
         case KC_F24:
@@ -379,7 +380,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
                 }
                 return false;
             }
+            break;
     }
-
     return true;
 }
