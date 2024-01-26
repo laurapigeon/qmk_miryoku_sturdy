@@ -150,11 +150,22 @@ combo_t key_combos[] = {
 
 bool remember_last_key_user(uint16_t keycode, keyrecord_t* record,
                             uint8_t* remembered_mods) {
+    if (IS_QK_MOD_TAP(keycode)) {
+        keycode = QK_MOD_TAP_GET_TAP_KEYCODE(keycode);
+    }
+    if (IS_QK_LAYER_TAP(keycode)) {
+        keycode = QK_LAYER_TAP_GET_TAP_KEYCODE(keycode);
+    }
     switch (keycode) {
+        case KC_A ... KC_Z:
+            if ((*remembered_mods & ~(MOD_MASK_SHIFT | MOD_BIT(KC_RALT))) == 0) {
+                *remembered_mods &= ~MOD_MASK_SHIFT;
+            }
+            break;
         case KC_F21:
         case KC_F22:
         case KC_F23:
-        case LT(U_NAV,KC_F24):
+        case KC_F24:
             return false;  // Ignore keys.
     }
 
@@ -162,16 +173,22 @@ bool remember_last_key_user(uint16_t keycode, keyrecord_t* record,
 }
 
 static void process_altrep_macro_key(uint16_t prev_keycode, uint8_t prev_mods) {
+    if (IS_QK_MOD_TAP(prev_keycode)) {
+        prev_keycode = QK_MOD_TAP_GET_TAP_KEYCODE(prev_keycode);
+    }
+    if (IS_QK_LAYER_TAP(prev_keycode)) {
+        prev_keycode = QK_LAYER_TAP_GET_TAP_KEYCODE(prev_keycode);
+    }
     switch (prev_keycode) {
-        case LGUI_T(KC_S): SEND_STRING(/*s*/"k"); break;
-        case LALT_T(KC_T): SEND_STRING(/*t*/"ment"); break;
-        case LCTL_T(KC_R): SEND_STRING(/*r*/"l"); break;
-        case LSFT_T(KC_D): SEND_STRING(/*d*/"y"); break;
+        case KC_S: SEND_STRING(/*s*/"k"); break;
+        case KC_T: SEND_STRING(/*t*/"ment"); break;
+        case KC_R: SEND_STRING(/*r*/"l"); break;
+        case KC_D: SEND_STRING(/*d*/"y"); break;
         case KC_Y: SEND_STRING(/*y*/"p"); break;
-        case LSFT_T(KC_N): SEND_STRING(/*n*/"ion"); break;
-        case LCTL_T(KC_E): SEND_STRING(/*e*/"u"); break;
-        case LALT_T(KC_A): SEND_STRING(/*a*/"o"); break;
-        case LGUI_T(KC_I): SEND_STRING(/*i*/"on"); break;
+        case KC_N: SEND_STRING(/*n*/"ion"); break;
+        case KC_E: SEND_STRING(/*e*/"u"); break;
+        case KC_A: SEND_STRING(/*a*/"o"); break;
+        case KC_I: SEND_STRING(/*i*/"on"); break;
         case KC_V: SEND_STRING(/*v*/"er"); break;
         case KC_M: SEND_STRING(/*m*/"ent"); break;
         case KC_L: SEND_STRING(/*l*/"k"); break;
@@ -181,13 +198,13 @@ static void process_altrep_macro_key(uint16_t prev_keycode, uint8_t prev_mods) {
         case KC_U: SEND_STRING(/*u*/"e"); break;
         case KC_O: SEND_STRING(/*o*/"a"); break;
         case KC_Q: SEND_STRING(/*q*/"ui"); break;
-        case LT(U_BUTTON,KC_X): SEND_STRING(/*x*/"es"); break;
-        case ALGR_T(KC_K): SEND_STRING(/*k*/"s"); break;
+        case KC_X: SEND_STRING(/*x*/"es"); break;
+        case KC_K: SEND_STRING(/*k*/"s"); break;
         case KC_J: SEND_STRING(/*j*/"ust"); break;
         case KC_G: SEND_STRING(/*g*/"y"); break;
         case KC_W: SEND_STRING(/*w*/"hich"); break;
         case KC_COMM: SEND_STRING(/*,*/" but"); break;
-        case LT(U_NUM,KC_SPC): SEND_STRING(/* */"the"); break;
+        case KC_SPC: SEND_STRING(/* */"the"); break;
         default:
             add_mods(prev_mods);
             tap_code16(prev_keycode);
@@ -196,16 +213,22 @@ static void process_altrep_macro_key(uint16_t prev_keycode, uint8_t prev_mods) {
 }
 
 static void process_rep_macro_key(uint16_t prev_keycode, uint8_t prev_mods) {
+    if (IS_QK_MOD_TAP(prev_keycode)) {
+        prev_keycode = QK_MOD_TAP_GET_TAP_KEYCODE(prev_keycode);
+    }
+    if (IS_QK_LAYER_TAP(prev_keycode)) {
+        prev_keycode = QK_LAYER_TAP_GET_TAP_KEYCODE(prev_keycode);
+    }
     switch (prev_keycode) {
         case KC_Y: SEND_STRING(/*y*/"ou"); break;
-        case LALT_T(KC_A): SEND_STRING(/*a*/"nd"); break;
-        case LGUI_T(KC_I): SEND_STRING(/*i*/"ng"); break;
+        case KC_A: SEND_STRING(/*a*/"nd"); break;
+        case KC_I: SEND_STRING(/*i*/"ng"); break;
         case KC_B: SEND_STRING(/*b*/"ecause"); break;
         case KC_Q: SEND_STRING(/*q*/"ue"); break;
         case KC_J: SEND_STRING(/*j*/"udge"); break;
         case KC_W: SEND_STRING(/*w*/"ould"); break;
         case KC_COMM: SEND_STRING(/*,*/" and"); break;
-        case LT(U_NUM,KC_SPC): SEND_STRING(/* */"for"); break;
+        case KC_SPC: SEND_STRING(/* */"for"); break;
         default:
             add_mods(prev_mods);
             tap_code16(prev_keycode);
@@ -273,19 +296,19 @@ static void process_magic_key_3(uint16_t prev_keycode, uint8_t prev_mods) {
 */
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     switch (keycode) {
-        case KC_F21: 
+        case KC_F21:
             if (record->event.pressed) {
                 process_altrep_macro_key(get_last_keycode(), get_last_mods());
                 return false;
             }
-            return false;
+            break;
 
         case LT(U_NAV,KC_F24):
             if (record->event.pressed && record->tap.count) {
                 process_rep_macro_key(get_last_keycode(), get_last_mods());
                 return false;
             }
-            return true;
+            break;
     }
 
     return true;
