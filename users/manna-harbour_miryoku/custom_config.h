@@ -3,10 +3,10 @@
 #define EXTRA_SHORT_COMBOS
 
 #define MIRYOKU_LAYER_BASE \
-KC_V,              KC_M,              KC_L,              KC_C,              KC_P,              KC_B,              KC_F21,            KC_U,              KC_O,              KC_Q,              \
+KC_V,              KC_M,              KC_L,              KC_C,              KC_P,              KC_B,              KC_F24,            KC_U,              KC_O,              KC_Q,              \
 LGUI_T(KC_S),      LALT_T(KC_T),      LCTL_T(KC_R),      LSFT_T(KC_D),      KC_Y,              KC_F,              LSFT_T(KC_N),      LCTL_T(KC_E),      LALT_T(KC_A),      LGUI_T(KC_I),      \
 LT(U_BUTTON,KC_X), ALGR_T(KC_K),      KC_J,              KC_G,              KC_W,              KC_Z,              KC_H,              KC_COMM,           ALGR_T(KC_DOT),    LT(U_BUTTON,KC_QUOT),\
-U_NP,              U_NP,              LT(U_MEDIA,KC_ESC),LT(U_NAV,KC_F24),  LT(U_MOUSE,KC_TAB),LT(U_SYM,KC_BSPC), LT(U_NUM,KC_SPC),  LT(U_FUN,KC_ENT),  U_NP,              U_NP
+U_NP,              U_NP,              LT(U_MEDIA,KC_ESC),LT(U_NAV,KC_F23),  LT(U_MOUSE,KC_TAB),LT(U_SYM,KC_BSPC), LT(U_NUM,KC_SPC),  LT(U_FUN,KC_ENT),  U_NP,              U_NP
 
 #define MIRYOKU_LAYER_NUM \
 UK_PLUS,           KC_4,              KC_5,              KC_6,              UC(0xD7),          U_NA,              TD(U_TD_U_BASE),   TD(U_TD_U_EXTRA),  TD(U_TD_U_TAP),    TD(U_TD_BOOT),     \

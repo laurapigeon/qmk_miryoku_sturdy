@@ -162,54 +162,12 @@ bool remember_last_key_user(uint16_t keycode, keyrecord_t* record,
                 *remembered_mods &= ~MOD_MASK_SHIFT;
             }
             break;
-        case KC_F21:
-        case KC_F22:
         case KC_F23:
         case KC_F24:
             return false;  // Ignore keys.
     }
 
     return true;  // Other keys can be repeated.
-}
-
-static void process_altrep_macro_key(uint16_t prev_keycode, uint8_t prev_mods) {
-    if (IS_QK_MOD_TAP(prev_keycode)) {
-        prev_keycode = QK_MOD_TAP_GET_TAP_KEYCODE(prev_keycode);
-    }
-    if (IS_QK_LAYER_TAP(prev_keycode)) {
-        prev_keycode = QK_LAYER_TAP_GET_TAP_KEYCODE(prev_keycode);
-    }
-    switch (prev_keycode) {
-        case KC_S: SEND_STRING(/*s*/"k"); break;
-        case KC_T: SEND_STRING(/*t*/"ment"); break;
-        case KC_R: SEND_STRING(/*r*/"l"); break;
-        case KC_D: SEND_STRING(/*d*/"y"); break;
-        case KC_Y: SEND_STRING(/*y*/"p"); break;
-        case KC_N: SEND_STRING(/*n*/"ion"); break;
-        case KC_E: SEND_STRING(/*e*/"u"); break;
-        case KC_A: SEND_STRING(/*a*/"o"); break;
-        case KC_I: SEND_STRING(/*i*/"on"); break;
-        case KC_V: SEND_STRING(/*v*/"er"); break;
-        case KC_M: SEND_STRING(/*m*/"ent"); break;
-        case KC_L: SEND_STRING(/*l*/"k"); break;
-        case KC_C: SEND_STRING(/*c*/"k"); break;
-        case KC_P: SEND_STRING(/*p*/"y"); break;
-        case KC_B: SEND_STRING(/*b*/"efore"); break;
-        case KC_U: SEND_STRING(/*u*/"e"); break;
-        case KC_O: SEND_STRING(/*o*/"a"); break;
-        case KC_Q: SEND_STRING(/*q*/"ui"); break;
-        case KC_X: SEND_STRING(/*x*/"es"); break;
-        case KC_K: SEND_STRING(/*k*/"s"); break;
-        case KC_J: SEND_STRING(/*j*/"ust"); break;
-        case KC_G: SEND_STRING(/*g*/"y"); break;
-        case KC_W: SEND_STRING(/*w*/"hich"); break;
-        case KC_COMM: SEND_STRING(/*,*/" but"); break;
-        case KC_SPC: SEND_STRING(/* */"the"); break;
-        default:
-            add_mods(prev_mods);
-            tap_code16(prev_keycode);
-            del_mods(prev_mods);
-    }
 }
 
 static void process_rep_macro_key(uint16_t prev_keycode, uint8_t prev_mods) {
@@ -220,14 +178,35 @@ static void process_rep_macro_key(uint16_t prev_keycode, uint8_t prev_mods) {
         prev_keycode = QK_LAYER_TAP_GET_TAP_KEYCODE(prev_keycode);
     }
     switch (prev_keycode) {
-        case KC_Y: SEND_STRING(/*y*/"ou"); break;
         case KC_A: SEND_STRING(/*a*/"nd"); break;
-        case KC_I: SEND_STRING(/*i*/"ng"); break;
         case KC_B: SEND_STRING(/*b*/"ecause"); break;
-        case KC_Q: SEND_STRING(/*q*/"ue"); break;
+        //case KC_C: SEND_STRING(/*c*/""); break;
+        //case KC_D: SEND_STRING(/*d*/""); break;
+        //case KC_E: SEND_STRING(/*e*/""); break;
+        //case KC_F: SEND_STRING(/*f*/""); break;
+        //case KC_G: SEND_STRING(/*g*/""); break;
+        //case KC_H: SEND_STRING(/*h*/""); break;
+        case KC_I: SEND_STRING(/*i*/"ng"); break;
         case KC_J: SEND_STRING(/*j*/"udge"); break;
+        //case KC_K: SEND_STRING(/*k*/""); break;
+        //case KC_L: SEND_STRING(/*l*/""); break;
+        //case KC_M: SEND_STRING(/*m*/""); break;
+        //case KC_N: SEND_STRING(/*n*/""); break;
+        //case KC_O: SEND_STRING(/*o*/""); break;
+        //case KC_P: SEND_STRING(/*p*/""); break;
+        case KC_Q: SEND_STRING(/*q*/"ue"); break;
+        //case KC_R: SEND_STRING(/*r*/""); break;
+        //case KC_S: SEND_STRING(/*s*/""); break;
+        //case KC_T: SEND_STRING(/*t*/""); break;
+        //case KC_U: SEND_STRING(/*u*/""); break;
+        //case KC_V: SEND_STRING(/*v*/""); break;
         case KC_W: SEND_STRING(/*w*/"ould"); break;
+        //case KC_X: SEND_STRING(/*x*/"es"); break;
+        case KC_Y: SEND_STRING(/*y*/"ou"); break;
+        //case KC_Z: SEND_STRING(/*z*/""); break;
         case KC_COMM: SEND_STRING(/*,*/" and"); break;
+        //case KC_DOT: SEND_STRING(/*.*/""); break;
+        //case KC_QUOT: SEND_STRING(/*'*/""); break;
         case KC_SPC: SEND_STRING(/* */"for"); break;
         default:
             add_mods(prev_mods);
@@ -235,80 +214,171 @@ static void process_rep_macro_key(uint16_t prev_keycode, uint8_t prev_mods) {
             del_mods(prev_mods);
     }
 }
-/*
-static void process_magic_key_2(uint16_t prev_keycode, uint8_t prev_mods) {
+
+static void process_altrep_macro_key(uint16_t prev_keycode, uint8_t prev_mods) {
+    if (IS_QK_MOD_TAP(prev_keycode)) {
+        prev_keycode = QK_MOD_TAP_GET_TAP_KEYCODE(prev_keycode);
+    }
+    if (IS_QK_LAYER_TAP(prev_keycode)) {
+        prev_keycode = QK_LAYER_TAP_GET_TAP_KEYCODE(prev_keycode);
+    }
     switch (prev_keycode) {
-        case LGUI_T(KC_S): SEND_STRING("hould"); break;
-        case LALT_T(KC_T): SEND_STRING("hough"); break;
-        case LCTL_T(KC_R): SEND_STRING("ight"); break;
-        case LSFT_T(KC_D): SEND_STRING("evelop"); break;
-        case KC_Y: break;
-        case KC_F: SEND_STRING("ollow"); break;
-        case LSFT_T(KC_N): SEND_STRING("eighbor"); break;
-        case LCTL_T(KC_E): break;
-        case LALT_T(KC_A): SEND_STRING("lready"); break;
-        case LGUI_T(KC_I): SEND_STRING("'ll"); break;
-        case KC_V: break;
-        case KC_M: SEND_STRING("ight"); break;
-        case KC_L: SEND_STRING("ittle"); break;
-        case KC_C: SEND_STRING("ould"); break;
-        case KC_P: SEND_STRING("sych"); break;
-        case KC_B: SEND_STRING("ecome"); break;
-        case KC_U: SEND_STRING("pgrade"); break;
-        case KC_O: SEND_STRING("ther"); break;
-        case KC_Q: break;
-        case LT(U_BUTTON,KC_X): break;
-        case ALGR_T(KC_K): SEND_STRING("now"); break;
-        case KC_J: SEND_STRING("udge"); break;
-        case KC_G: SEND_STRING("eneral"); break;
-        case KC_W: SEND_STRING("here"); break;
-        case KC_Z: break;
-        case KC_H: SEND_STRING("owever"); break;
-        case KC_COMM: SEND_STRING(" however"); break;
-        case ALGR_T(KC_DOT): break;
-        case LT(U_BUTTON,KC_QUOT): break;
-        case LT(U_NUM,KC_SPC): SEND_STRING("the"); break;
-        default: SEND_STRING("'ll"); break;
+        case KC_A: SEND_STRING(/*a*/"o"); break;
+        case KC_B: SEND_STRING(/*b*/"efore"); break;
+        case KC_C: SEND_STRING(/*c*/"k"); break;
+        case KC_D: SEND_STRING(/*d*/"y"); break;
+        case KC_E: SEND_STRING(/*e*/"u"); break;
+        //case KC_F: SEND_STRING(/*f*/""); break;
+        case KC_G: SEND_STRING(/*g*/"y"); break;
+        //case KC_H: SEND_STRING(/*h*/""); break;
+        case KC_I: SEND_STRING(/*i*/"on"); break;
+        case KC_J: SEND_STRING(/*j*/"ust"); break;
+        case KC_K: SEND_STRING(/*k*/"s"); break;
+        case KC_L: SEND_STRING(/*l*/"k"); break;
+        case KC_M: SEND_STRING(/*m*/"ent"); break;
+        case KC_N: SEND_STRING(/*n*/"ion"); break;
+        case KC_O: SEND_STRING(/*o*/"a"); break;
+        case KC_P: SEND_STRING(/*p*/"y"); break;
+        case KC_Q: SEND_STRING(/*q*/"ui"); break;
+        case KC_R: SEND_STRING(/*r*/"l"); break;
+        case KC_S: SEND_STRING(/*s*/"k"); break;
+        case KC_T: SEND_STRING(/*t*/"ment"); break;
+        case KC_U: SEND_STRING(/*u*/"e"); break;
+        case KC_V: SEND_STRING(/*v*/"er"); break;
+        case KC_W: SEND_STRING(/*w*/"hich"); break;
+        case KC_X: SEND_STRING(/*x*/"es"); break;
+        case KC_Y: SEND_STRING(/*y*/"p"); break;
+        //case KC_Z: SEND_STRING(/*z*/""); break;
+        case KC_COMM: SEND_STRING(/*,*/" but"); break;
+        //case KC_DOT: SEND_STRING(/*.*/""); break;
+        //case KC_QUOT: SEND_STRING(/*'*/""); break;
+        case KC_SPC: SEND_STRING(/* */"the"); break;
+        default:
+            add_mods(prev_mods);
+            tap_code16(prev_keycode);
+            del_mods(prev_mods);
     }
 }
 
-static void process_magic_key_3(uint16_t prev_keycode, uint8_t prev_mods) {
+static void process_rep_macro_key_2(uint16_t prev_keycode, uint8_t prev_mods) {
+    if (IS_QK_MOD_TAP(prev_keycode)) {
+        prev_keycode = QK_MOD_TAP_GET_TAP_KEYCODE(prev_keycode);
+    }
+    if (IS_QK_LAYER_TAP(prev_keycode)) {
+        prev_keycode = QK_LAYER_TAP_GET_TAP_KEYCODE(prev_keycode);
+    }
     switch (prev_keycode) {
-        case KC_B: SEND_STRING("etween"); break;
-        case LSFT_T(KC_N): SEND_STRING("umber"); break;
-        case KC_U: SEND_STRING("pdate"); break;
-        case LALT_T(KC_A): SEND_STRING("bout"); break;
-        case KC_W: SEND_STRING("orld"); break;
-        case KC_G: SEND_STRING("overn"); break;
-        case KC_P: SEND_STRING("rogram"); break;
-        case KC_Q: SEND_STRING("uestion"); break;
-        case KC_C: SEND_STRING("rowd"); break;
-        case LGUI_T(KC_S): SEND_STRING("chool"); break;
-        case LALT_T(KC_T): SEND_STRING("hrough"); break;
-        case KC_M: SEND_STRING("anage"); break;
-        case KC_O: SEND_STRING("xygen"); break;
-        case LGUI_T(KC_I): SEND_STRING("'m"); break;
-        case LCTL_T(KC_E): SEND_STRING("'re"); break;
-        case KC_COMM: SEND_STRING(" since"); break;
-        default: break;
+        case KC_A: SEND_STRING(/*a*/"lready"); break;
+        case KC_B: SEND_STRING(/*b*/"ecome"); break;
+        case KC_C: SEND_STRING(/*c*/"ould"); break;
+        case KC_D: SEND_STRING(/*d*/"evelop"); break;
+        //case KC_E: SEND_STRING(/*e*/""); break;
+        case KC_F: SEND_STRING(/*f*/"ollow"); break;
+        case KC_G: SEND_STRING(/*g*/"eneral"); break;
+        case KC_H: SEND_STRING(/*h*/"owever"); break;
+        case KC_I: SEND_STRING(/*i*/"'ll"); break;
+        case KC_J: SEND_STRING(/*j*/"udge"); break;
+        case KC_K: SEND_STRING(/*k*/"now"); break;
+        case KC_L: SEND_STRING(/*l*/"ittle"); break;
+        case KC_M: SEND_STRING(/*m*/"ight"); break;
+        case KC_N: SEND_STRING(/*n*/"eighbor"); break;
+        case KC_O: SEND_STRING(/*o*/"ther"); break;
+        case KC_P: SEND_STRING(/*p*/"sych"); break;
+        //case KC_Q: SEND_STRING(/*q*/""); break;
+        case KC_R: SEND_STRING(/*r*/"ight"); break;
+        case KC_S: SEND_STRING(/*s*/"hould"); break;
+        case KC_T: SEND_STRING(/*t*/"hough"); break;
+        case KC_U: SEND_STRING(/*u*/"pgrade"); break;
+        //case KC_V: SEND_STRING(/*v*/""); break;
+        case KC_W: SEND_STRING(/*w*/"here"); break;
+        //case KC_X: SEND_STRING(/*x*/""); break;
+        //case KC_Y: SEND_STRING(/*y*/""); break;
+        //case KC_Z: SEND_STRING(/*z*/""); break;
+        case KC_COMM: SEND_STRING(/*,*/" however"); break;
+        //case KC_DOT: SEND_STRING(/*.*/""); break;
+        //case KC_QUOT: SEND_STRING(/*'*/""); break;
+        case KC_SPC: SEND_STRING(/* */"the"); break;
+        default:
+            add_mods(prev_mods);
+            tap_code16(prev_keycode);
+            del_mods(prev_mods);
     }
 }
-*/
+
+static void process_altrep_macro_key_2(uint16_t prev_keycode, uint8_t prev_mods) {
+    if (IS_QK_MOD_TAP(prev_keycode)) {
+        prev_keycode = QK_MOD_TAP_GET_TAP_KEYCODE(prev_keycode);
+    }
+    if (IS_QK_LAYER_TAP(prev_keycode)) {
+        prev_keycode = QK_LAYER_TAP_GET_TAP_KEYCODE(prev_keycode);
+    }
+    switch (prev_keycode) {
+        case KC_A: SEND_STRING(/*a*/"bout"); break;
+        case KC_B: SEND_STRING(/*b*/"etween"); break;
+        case KC_C: SEND_STRING(/*c*/"rowd"); break;
+        //case KC_D: SEND_STRING(/*d*/""); break;
+        case KC_E: SEND_STRING(/*e*/"'re"); break;
+        //case KC_F: SEND_STRING(/*f*/""); break;
+        case KC_G: SEND_STRING(/*g*/"overn"); break;
+        //case KC_H: SEND_STRING(/*h*/""); break;
+        case KC_I: SEND_STRING(/*i*/"'m"); break;
+        //case KC_J: SEND_STRING(/*j*/""); break;
+        //case KC_K: SEND_STRING(/*k*/""); break;
+        //case KC_L: SEND_STRING(/*l*/""); break;
+        case KC_M: SEND_STRING(/*m*/"anage"); break;
+        case KC_N: SEND_STRING(/*n*/"umber"); break;
+        case KC_O: SEND_STRING(/*o*/"xygen"); break;
+        case KC_P: SEND_STRING(/*p*/"rogram"); break;
+        case KC_Q: SEND_STRING(/*q*/"uestion"); break;
+        //case KC_R: SEND_STRING(/*r*/""); break;
+        case KC_S: SEND_STRING(/*s*/"chool"); break;
+        case KC_T: SEND_STRING(/*t*/"hrough"); break;
+        case KC_U: SEND_STRING(/*u*/"pdate"); break;
+        //case KC_V: SEND_STRING(/*v*/""); break;
+        case KC_W: SEND_STRING(/*w*/"orld"); break;
+        //case KC_X: SEND_STRING(/*x*/""); break;
+        //case KC_Y: SEND_STRING(/*y*/""); break;
+        //case KC_Z: SEND_STRING(/*z*/""); break;
+        case KC_COMM: SEND_STRING(/*,*/" since"); break;
+        //case KC_DOT: SEND_STRING(/*.*/""); break;
+        //case KC_QUOT: SEND_STRING(/*'*/""); break;
+        //case KC_SPC: SEND_STRING(/* */""); break;
+        default:
+            add_mods(prev_mods);
+            tap_code16(prev_keycode);
+            del_mods(prev_mods);
+    }
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     switch (keycode) {
-        case KC_F21:
-            if (record->event.pressed) {
-                process_altrep_macro_key(get_last_keycode(), get_last_mods());
-                return false;
-            }
-            break;
-
-        case LT(U_NAV,KC_F24):
+        case LT(U_NAV,KC_F23):
             if (record->event.pressed && record->tap.count) {
-                process_rep_macro_key(get_last_keycode(), get_last_mods());
-                return false;
+                uint8_t mods = get_mods();
+                if ((mods & MOD_MASK_SHIFT) == 0) {
+                    process_rep_macro_key(get_last_keycode(), get_last_mods());
+                }
+                else {
+                    del_mods(MOD_MASK_SHIFT);
+                    process_rep_macro_key_2(get_last_keycode(), get_last_mods());
+                    add_mods(MOD_MASK_SHIFT);
+                }
             }
-            break;
+            return false;
+
+        case KC_F24:
+            if (record->event.pressed) {
+                uint8_t mods = get_mods();
+                if ((mods & MOD_MASK_SHIFT) == 0) {
+                    process_altrep_macro_key(get_last_keycode(), get_last_mods());
+                }
+                else {
+                    del_mods(MOD_MASK_SHIFT);
+                    process_altrep_macro_key_2(get_last_keycode(), get_last_mods());
+                    add_mods(MOD_MASK_SHIFT);
+                }
+            }
+            return false;
     }
 
     return true;
