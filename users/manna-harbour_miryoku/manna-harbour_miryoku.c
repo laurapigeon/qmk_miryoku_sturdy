@@ -166,7 +166,6 @@ bool remember_last_key_user(uint16_t keycode, keyrecord_t* record,
         case KC_F24:
             return false;  // Ignore keys.
     }
-
     return true;  // Other keys can be repeated.
 }
 
@@ -361,10 +360,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
                 else {
                     del_mods(MOD_MASK_SHIFT);
                     process_rep_macro_key_2(get_last_keycode(), get_last_mods());
-                    add_mods(MOD_MASK_SHIFT);
+                    set_mods(mods);
                 }
+                return false;
             }
-            return false;
+
 
         case KC_F24:
             if (record->event.pressed) {
@@ -375,10 +375,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
                 else {
                     del_mods(MOD_MASK_SHIFT);
                     process_altrep_macro_key_2(get_last_keycode(), get_last_mods());
-                    add_mods(MOD_MASK_SHIFT);
+                    set_mods(mods);
                 }
+                return false;
             }
-            return false;
     }
 
     return true;
