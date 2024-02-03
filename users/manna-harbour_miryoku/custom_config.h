@@ -33,7 +33,7 @@ TD(U_TD_U_BUTTON), KC_ALGR,           TD(U_TD_U_SYM),    TD(U_TD_U_MOUSE),  TD(U
 U_NP,              U_NP,              U_NA,              U_NA,              U_NA,              KC_BTN2,           KC_BTN1,           KC_BTN3,           U_NP,              U_NP
 
 #define MIRYOKU_LAYER_FUN \
-UC(0x1FD7),        UC(0x00B0),        KC_LCBR,           KC_RCBR,           KC_PIPE,           U_NA,              U_NA,              TD(U_TD_U_EXTRA),  TD(U_TD_U_TAP),    TD(U_TD_BOOT),     \
+UC(0x1FD7),        UC(0x00B0),        KC_LCBR,           KC_RCBR,           UK_PIPE,           U_NA,              U_NA,              TD(U_TD_U_EXTRA),  TD(U_TD_U_TAP),    TD(U_TD_BOOT),     \
 UC(0x2013),        UC(0x00B7),        KC_LABK,           KC_RABK,           UC(0x2022),        U_NA,              KC_LSFT,           KC_LCTL,           KC_LALT,           KC_LGUI,           \
 UC(0x2661),        UC(0x2260),        UC(0x00B2),        UC(0x00B3),        TD(U_TD_U_BASE),   TD(U_TD_U_BASE),   TD(U_TD_U_FUN),    TD(U_TD_U_MEDIA),  KC_ALGR,           TD(U_TD_U_BUTTON), \
 U_NP,              U_NP,              UC(0x2717),        UC(0x2713),        UC(0x2248),        U_NA,              U_NA,              U_NA,              U_NP,              U_NP
@@ -60,4 +60,4 @@ U_NP,              U_NP,              KC_ESC,            KC_SPC,            KC_T
 U_UND,             U_CUT,             U_CPY,             U_PST,             U_RDO,             U_PST,             U_UND,             U_CPY,             U_CUT,             U_RDO,             \
 KC_LGUI,           KC_LALT,           KC_LCTL,           KC_LSFT,           U_NU,              KC_ESC,            KC_LSFT,           KC_LCTL,           KC_LALT,           KC_LGUI,           \
 U_UND,             U_CUT,             U_CPY,             U_PST,             TD(U_TD_U_BASE),   TD(U_TD_U_BASE),   KC_SPC,            KC_WH_D,           KC_WH_U,           U_NA,              \
-U_NP,              U_NP,              KC_BTN3,           KC_BTN1,           KC_BTN2,           KC_BTN2,           KC_BTN1,           KC_BTN3,           U_NP,              U_NP
+U_NP,              U_NP,              KC_ESC,            KC_SPC,            KC_TAB,            KC_BTN2,           KC_BTN1,           KC_BTN3,           U_NP,              U_NP
