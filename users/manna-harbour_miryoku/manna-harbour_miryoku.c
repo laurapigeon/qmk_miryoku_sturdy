@@ -99,11 +99,6 @@ const key_override_t twelve_key_override = ko_make_basic(MOD_MASK_GUI, UK_COLN, 
 
 const key_override_t pound_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_PND, UK_DLR);
 const key_override_t pipe_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_PIPE, UK_NOT);
-const key_override_t quote_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_DQUO, KC_QUOT);
-const key_override_t leftbracket_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_LBRC, UK_LCBR);
-const key_override_t rightbracket_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_RBRC, UK_RCBR);
-const key_override_t leftparen_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_LPRN, UK_LABK);
-const key_override_t rightparen_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_RPRN, UK_RABK);
 
 const key_override_t **key_overrides = (const key_override_t *[]){
     &comma_key_override,
@@ -123,17 +118,12 @@ const key_override_t **key_overrides = (const key_override_t *[]){
     &twelve_key_override,
     &pound_key_override,
     &pipe_key_override,
-    &quote_key_override,
-    &leftbracket_key_override,
-    &rightbracket_key_override,
-    &leftparen_key_override,
-    &rightparen_key_override,
     NULL
 };
 
 
 // thumb combos
-
+/*
 const uint16_t PROGMEM thumbcombos_num[] = {KC_DOT, KC_EQL, COMBO_END};
 const uint16_t PROGMEM thumbcombos_nav[] = {KC_DEL, KC_ENT, COMBO_END};
 const uint16_t PROGMEM thumbcombos_sym[] = {UK_HASH, UK_UNDS, COMBO_END};
@@ -144,7 +134,7 @@ combo_t key_combos[] = {
     COMBO(thumbcombos_sym, TD(U_TD_U_BASE)),
     COMBO(thumbcombos_mos, TD(U_TD_U_BASE))
 };
-
+*/
 
 // magic keys
 
