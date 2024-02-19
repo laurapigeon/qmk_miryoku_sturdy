@@ -93,12 +93,12 @@ const key_override_t six_key_override = ko_make_basic(MOD_MASK_GUI, KC_6, KC_F6)
 const key_override_t seven_key_override = ko_make_basic(MOD_MASK_GUI, KC_7, KC_F7);
 const key_override_t eight_key_override = ko_make_basic(MOD_MASK_GUI, KC_8, KC_F8);
 const key_override_t nine_key_override = ko_make_basic(MOD_MASK_GUI, KC_9, KC_F9);
-const key_override_t ten_key_override = ko_make_basic(MOD_MASK_GUI, KC_MINS, KC_F10);
-const key_override_t eleven_key_override = ko_make_basic(MOD_MASK_GUI, UK_PLUS, KC_F11);
-const key_override_t twelve_key_override = ko_make_basic(MOD_MASK_GUI, UK_COLN, KC_F12);
+const key_override_t ten_key_override = ko_make_basic(MOD_MASK_GUI, UK_PLUS, KC_F10);
+const key_override_t eleven_key_override = ko_make_basic(MOD_MASK_GUI, UC(0xD7), KC_F11);
+const key_override_t twelve_key_override = ko_make_basic(MOD_MASK_GUI, UK_CIRC, KC_F12);
 
-const key_override_t pound_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_PND, UK_DLR);
 const key_override_t pipe_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_PIPE, UK_NOT);
+const key_override_t caps_key_override = ko_make_basic(MOD_MASK_SHIFT, CW_TOGG, KC_CAPS);
 
 const key_override_t **key_overrides = (const key_override_t *[]){
     &comma_key_override,
@@ -116,8 +116,8 @@ const key_override_t **key_overrides = (const key_override_t *[]){
     &ten_key_override,
     &eleven_key_override,
     &twelve_key_override,
-    &pound_key_override,
     &pipe_key_override,
+    &caps_key_override,
     NULL
 };
 
