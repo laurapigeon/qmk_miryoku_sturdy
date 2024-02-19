@@ -83,6 +83,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 const key_override_t comma_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_COMM, UK_QUES);
 const key_override_t period_key_override = ko_make_basic(MOD_MASK_SHIFT, ALGR_T(KC_DOT), UK_EXLM);
 const key_override_t apostrophe_key_override = ko_make_basic(MOD_MASK_SHIFT, LT(U_BUTTON,KC_QUOT), UK_DQUO);
+const key_override_t pipe_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_PIPE, UK_NOT);
 
 const key_override_t one_key_override = ko_make_basic(MOD_MASK_GUI, KC_1, KC_F1);
 const key_override_t two_key_override = ko_make_basic(MOD_MASK_GUI, KC_2, KC_F2);
@@ -97,13 +98,11 @@ const key_override_t ten_key_override = ko_make_basic(MOD_MASK_GUI, UK_PLUS, KC_
 const key_override_t eleven_key_override = ko_make_basic(MOD_MASK_GUI, UC(0xD7), KC_F11);
 const key_override_t twelve_key_override = ko_make_basic(MOD_MASK_GUI, UK_CIRC, KC_F12);
 
-const key_override_t pipe_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_PIPE, UK_NOT);
-const key_override_t caps_key_override = ko_make_basic(MOD_MASK_SHIFT, CW_TOGG, KC_CAPS);
-
 const key_override_t **key_overrides = (const key_override_t *[]){
     &comma_key_override,
     &period_key_override,
     &apostrophe_key_override,
+    &pipe_key_override,
     &one_key_override,
     &two_key_override,
     &three_key_override,
@@ -116,8 +115,6 @@ const key_override_t **key_overrides = (const key_override_t *[]){
     &ten_key_override,
     &eleven_key_override,
     &twelve_key_override,
-    &pipe_key_override,
-    &caps_key_override,
     NULL
 };
 
@@ -356,7 +353,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
             }
             break;
 
-
         case KC_F24:
             if (record->event.pressed) {
                 uint8_t mods = get_mods();
@@ -371,6 +367,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
                 return false;
             }
             break;
+
+        case CW_TOGG:
+            if (record->event.pressed) {
+                uint8_t mods = get_mods();
+                if ((mods & MOD_MASK_SHIFT) != 0) {
+                    tap_code16(KC_CAPS);
+                    return false;
+                }
+            }
     }
     return true;
 }
