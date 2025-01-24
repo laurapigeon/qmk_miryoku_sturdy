@@ -84,6 +84,10 @@ const key_override_t comma_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_COMM,
 const key_override_t period_key_override = ko_make_basic(MOD_MASK_SHIFT, ALGR_T(KC_DOT), UK_EXLM);
 const key_override_t apostrophe_key_override = ko_make_basic(MOD_MASK_SHIFT, LT(U_BUTTON,KC_QUOT), UK_DQUO);
 const key_override_t pipe_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_PIPE, UK_NOT);
+const key_override_t parenthesis_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_LPRN, UK_RPRN);
+const key_override_t bracket_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_LBRC, UK_RBRC);
+const key_override_t curly_bracket_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_LCBR, UK_RCBR);
+const key_override_t angle_bracket_key_override = ko_make_basic(MOD_MASK_SHIFT, UK_LABK, UK_RABK);
 
 const key_override_t one_key_override = ko_make_basic(MOD_MASK_GUI, KC_1, KC_F1);
 const key_override_t two_key_override = ko_make_basic(MOD_MASK_GUI, KC_2, KC_F2);
@@ -95,7 +99,7 @@ const key_override_t seven_key_override = ko_make_basic(MOD_MASK_GUI, KC_7, KC_F
 const key_override_t eight_key_override = ko_make_basic(MOD_MASK_GUI, KC_8, KC_F8);
 const key_override_t nine_key_override = ko_make_basic(MOD_MASK_GUI, KC_9, KC_F9);
 const key_override_t ten_key_override = ko_make_basic(MOD_MASK_GUI, UK_PLUS, KC_F10);
-const key_override_t eleven_key_override = ko_make_basic(MOD_MASK_GUI, UC(0xD7), KC_F11);
+const key_override_t eleven_key_override = ko_make_basic(MOD_MASK_GUI, UK_ASTR, KC_F11);
 const key_override_t twelve_key_override = ko_make_basic(MOD_MASK_GUI, UK_CIRC, KC_F12);
 
 const key_override_t **key_overrides = (const key_override_t *[]){
@@ -103,6 +107,10 @@ const key_override_t **key_overrides = (const key_override_t *[]){
     &period_key_override,
     &apostrophe_key_override,
     &pipe_key_override,
+    &parenthesis_key_override,
+    &bracket_key_override,
+    &curly_bracket_key_override,
+    &angle_bracket_key_override,
     &one_key_override,
     &two_key_override,
     &three_key_override,
@@ -342,13 +350,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
             if (record->event.pressed && record->tap.count) {
                 uint8_t mods = get_mods();
                 if ((mods & MOD_MASK_SHIFT) == 0) {
+                    if (is_caps_word_on()) {
+                        set_mods(MOD_MASK_SHIFT);
+                    }
                     process_rep_macro_key(get_last_keycode(), get_last_mods());
                 }
                 else {
-                    del_mods(MOD_MASK_SHIFT);
+                    if (!is_caps_word_on()) {
+                        clear_mods();
+                    }
                     process_rep_macro_key_2(get_last_keycode(), get_last_mods());
-                    set_mods(mods);
                 }
+                set_mods(mods);
                 return false;
             }
             break;
@@ -357,25 +370,40 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
             if (record->event.pressed) {
                 uint8_t mods = get_mods();
                 if ((mods & MOD_MASK_SHIFT) == 0) {
+                    if (is_caps_word_on()) {
+                        set_mods(MOD_MASK_SHIFT);
+                    }
                     process_altrep_macro_key(get_last_keycode(), get_last_mods());
                 }
                 else {
+                    if (!is_caps_word_on()) {
+                        clear_mods();
+                    }
                     del_mods(MOD_MASK_SHIFT);
                     process_altrep_macro_key_2(get_last_keycode(), get_last_mods());
-                    set_mods(mods);
                 }
+                set_mods(mods);
                 return false;
             }
             break;
 
         case CW_TOGG:
             if (record->event.pressed) {
-                uint8_t mods = get_mods();
-                if ((mods & MOD_MASK_SHIFT) != 0) {
+                if ((get_mods() & MOD_MASK_SHIFT) != 0) {
                     tap_code16(KC_CAPS);
                     return false;
                 }
             }
+            break;
+
+        case LT(U_NUM,KC_SPC):
+            if (record->event.pressed && record->tap.count) {
+                if (get_mods() & MOD_MASK_GUI) {
+                    tap_code16(KC_DEL);
+                    return false;
+                }
+            }
+            break;
     }
     return true;
 }
