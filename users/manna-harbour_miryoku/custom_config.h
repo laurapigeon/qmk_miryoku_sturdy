@@ -22,8 +22,8 @@ TD(U_TD_U_BUTTON), KC_ALGR,           TD(U_TD_U_NUM),    TD(U_TD_U_NAV),    TD(U
 U_NP,              U_NP,              U_NA,              U_NA,              U_NA,              KC_DEL,            KC_SPC,            KC_ENT,            U_NP,              U_NP
 
 #define MIRYOKU_LAYER_SYM \
-UK_GRV,            UK_DLR,            KC_LBRC,           KC_LABK,           UK_PIPE,           U_NA,              U_NA,              TD(U_TD_U_EXTRA),  TD(U_TD_U_TAP),    TD(U_TD_BOOT),     \
-UK_SCLN,           UK_COLN,           UK_LPRN,           UK_LCBR,           UK_TILD,           U_NA,              KC_LSFT,           KC_LCTL,           KC_LALT,           KC_LGUI,           \
+UK_GRV,            UK_DLR,            KC_LCBR,           KC_LABK,           UK_PIPE,           U_NA,              U_NA,              TD(U_TD_U_EXTRA),  TD(U_TD_U_TAP),    TD(U_TD_BOOT),     \
+UK_SCLN,           UK_COLN,           UK_LPRN,           UK_LBRC,           UK_TILD,           U_NA,              KC_LSFT,           KC_LCTL,           KC_LALT,           KC_LGUI,           \
 KC_PERC,           UK_AMPR,           KC_SLSH,           UK_BSLS,           TD(U_TD_U_BASE),   TD(U_TD_U_BASE),   TD(U_TD_U_SYM),    TD(U_TD_U_MOUSE),  KC_ALGR,           TD(U_TD_U_BUTTON), \
 U_NP,              U_NP,              UK_HASH,           UK_AT,             UK_UNDS,           U_NA,              U_NA,              U_NA,              U_NP,              U_NP
 
